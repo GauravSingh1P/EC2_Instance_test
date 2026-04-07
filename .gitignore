@@ -1,0 +1,20 @@
+# Environments
+.env
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+nohup.out
+
+# IDEs
+.vscode/
+.idea/
+
+# Database (if using local sqlite for testing)
+*.sqlite3

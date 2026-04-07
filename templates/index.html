@@ -3,26 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Bridge Test</title>
+    <title>Food Bridge | Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>🍏 Food Bridge Test</h1>
-        <p>Testing GET and POST requests on EC2</p>
-
-        <form method="POST" class="test-form">
-            <input type="text" name="food_item" placeholder="Enter food name (e.g. Apples)" required>
-            <button type="submit">Submit Post</button>
-        </form>
-
-        {% if user_input %}
-        <div class="result-card">
-            <p><strong>POST Received:</strong> You submitted "{{ user_input }}"</p>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">☘️ Food<span>Bridge</span></a>
+            <div class="nav-links">
+                {% if username %}
+                    <span class="user-badge">Hi, {{ username }}</span>
+                    <a href="/logout" class="logout-link">Logout</a>
+                {% else %}
+                    <a href="/login">Login</a>
+                    <a href="/signup" class="btn-primary">Sign Up</a>
+                {% endif %}
+            </div>
         </div>
-        {% else %}
-        <p class="status">Waiting for a POST request...</p>
-        {% endif %}
+    </nav>
+
+    <div class="hero">
+        <div class="content-card">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}<div class="alert">{{ message }}</div>{% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            {% if username %}
+                <h1>Welcome to the Bridge</h1>
+                <p>Manage your food donations and track impacts in real-time.</p>
+                <div class="dashboard-actions">
+                    <button class="btn-primary">Post New Donation</button>
+                    <button class="btn-outline">View Requests</button>
+                </div>
+            {% else %}
+                <h1>Stop Waste. Feed Hope.</h1>
+                <p>Connecting surplus food from events to those who need it most.</p>
+                <a href="/signup" class="btn-primary">Start Donating Today</a>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>
