@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EC2 Flask Test</title>
+    <title>Food Bridge Test</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1> Flask Frontend is Live!</h1>
-        <p>Your EC2 instance is successfully hosting this page.</p>
-        <div class="card">
-            <h3>Project Status</h3>
-            <p>Connection: <strong>Secure</strong></p>
-            <p>Server: <strong>Ubuntu 24.04 (Stockholm)</strong></p>
+        <h1>🍏 Food Bridge Test</h1>
+        <p>Testing GET and POST requests on EC2</p>
+
+        <form method="POST" class="test-form">
+            <input type="text" name="food_item" placeholder="Enter food name (e.g. Apples)" required>
+            <button type="submit">Submit Post</button>
+        </form>
+
+        {% if user_input %}
+        <div class="result-card">
+            <p><strong>POST Received:</strong> You submitted "{{ user_input }}"</p>
         </div>
+        {% else %}
+        <p class="status">Waiting for a POST request...</p>
+        {% endif %}
     </div>
 </body>
 </html>
