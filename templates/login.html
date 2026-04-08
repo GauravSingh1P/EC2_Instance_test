@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CloudApp | Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="hero">
+        <div class="content-card">
+            <a href="/" class="logo" style="margin-bottom: 20px; display: block;">☁️ Cloud<span>App</span></a>
+            <h2>Login</h2>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}<div class="alert">{{ message }}</div>{% endfor %}
+              {% endif %}
+            {% endwith %}
+            <form method="POST" class="auth-form">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <p>New here? <a href="/signup">Sign up</a></p>
+        </div>
+    </div>
+</body>
+</html>

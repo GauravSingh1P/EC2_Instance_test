@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Bridge | Home</title>
+    <title>CloudApp | Test Environment</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">☘️ Food<span>Bridge</span></a>
+            <a href="/" class="logo">☁️ Cloud<span>App</span></a>
             <div class="nav-links">
                 {% if username %}
-                    <span class="user-badge">Hi, {{ username }}</span>
-                    <a href="/logout" class="logout-link">Logout</a>
+                    <a href="/game">🎮 Play Game</a>
+                    <span class="user-badge">User: {{ username }}</span>
+                    <a href="/logout">Logout</a>
                 {% else %}
                     <a href="/login">Login</a>
                     <a href="/signup" class="btn-primary">Sign Up</a>
@@ -30,17 +30,12 @@
               {% endif %}
             {% endwith %}
 
+            <h1>Deployment Successful</h1>
+            <p>If you see this page, your EC2 instance and Gunicorn service are running perfectly.</p>
             {% if username %}
-                <h1>Welcome to the Bridge</h1>
-                <p>Manage your food donations and track impacts in real-time.</p>
-                <div class="dashboard-actions">
-                    <button class="btn-primary">Post New Donation</button>
-                    <button class="btn-outline">View Requests</button>
-                </div>
+                <a href="/game" class="btn-primary">Launch Game Module</a>
             {% else %}
-                <h1>Stop Waste. Feed Hope.</h1>
-                <p>Connecting surplus food from events to those who need it most.</p>
-                <a href="/signup" class="btn-primary">Start Donating Today</a>
+                <a href="/signup" class="btn-primary">Get Started</a>
             {% endif %}
         </div>
     </div>

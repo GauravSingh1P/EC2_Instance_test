@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudApp | Memory Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">☁️ Cloud<span>App</span></a>
+            <div class="nav-links">
+                <span class="user-badge">Player: {{ username }}</span>
+                <a href="/logout" class="logout-link">Exit</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="content-card game-card">
+            <h2>Memory Match</h2>
+            <p>Find the matching cloud symbols!</p>
+            
+            <div id="game-grid" class="grid">
+                </div>
+
+            <div class="game-controls">
+                <button onclick="location.reload()" class="btn-outline">Reset Game</button>
+                <a href="/" class="btn-primary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const symbols = ['☁️', '🚀', '💻', '🔒', '⚡', '🛠️', '☁️', '🚀', '💻', '🔒', '⚡', '🛠️'];
+        let shuffled = symbols.sort(() => 0.5 - Math.random());
+        const grid = document.getElementById('game-grid');
+        let flippedCards = [];
+
+        shuffled.forEach((symbol) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.symbol = symbol;
+            
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">?</div>
+                    <div class="card-back">${symbol}</div>
+                </div>
+            `;
+
+            card.addEventListener('click', function() {
+                if (this.classList.contains('flipped') || flippedCards.length === 2) return;
+                
+                this.classList.add('flipped');
+                flippedCards.push(this);
+
+                if (flippedCards.length === 2) {
+                    if (flippedCards[0].dataset.symbol !== flippedCards[1].dataset.symbol) {
+                        setTimeout(() => {
+                            flippedCards.forEach(c => c.classList.remove('flipped'));
+                            flippedCards = [];
+                        }, 800);
+                    } else {
+                        flippedCards = [];
+                    }
+                }
+            });
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
